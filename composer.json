@@ -1,0 +1,13 @@
+{
+  "autoload": {
+    "psr-4": {
+      "SeeNotEvil\\Console\\": ["src//"]
+    }
+  },
+  "require": {
+    "psr/log" : "^1.0"
+  },
+  "require-dev": {
+     "phpunit/phpunit": "6.5"
+  }
+}
