@@ -7,5 +7,9 @@ simple cosole app routing (в процессе написания)
 Команды лежат по умолчанию в директории Command
 
 Пример ипользования
-php console.php help выполняет команду 
+php console.php help выполняет команду -- help и метод по умолчанию execute
+php console.php test -help выполняет команду -- test и метод help
+php console.php test -help --a=3 выполняет команду -- test и метод help и передавая в метод параметр $a
+
+
 
