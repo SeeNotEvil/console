@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-include_once 'vendor/autoload.php' ;
+require __DIR__.'/vendor/autoload.php' ;
 
 $config = include 'config.php';
 \SeeNotEvil\Console\Core\KernelFactory::factory($config)->execute($argv) ;
