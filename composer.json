@@ -1,7 +1,8 @@
 {
   "autoload": {
     "psr-4": {
-      "SeeNotEvil\\Console\\": ["src//"]
+      "SeeNotEvil\\Console\\": ["src//"],
+      "libs\\": ["libs//"]
     }
   },
   "require": {
