@@ -11,6 +11,8 @@ class BinaryNode {
 
     public function __construct($value)
     {
+
+
         $this->value = $value ;
     }
 
