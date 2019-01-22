@@ -3,7 +3,6 @@
 
 namespace SeeNotEvil\Console\Core ;
 
-use SeeNotEvil\Console\Core\Input\ArgumentParser;
 use SeeNotEvil\Console\Core\Out\Out;
 
 /**

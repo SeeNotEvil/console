@@ -34,6 +34,13 @@ class Kernel {
 
     public function includeRouterFolder()
     {
+        if(isset($this->config['routing_path'])) {
+            foreach ((array)$this->config['routing_path'] as $filePath) {
+                if(file_exists($filePath)) {
+                    include $filePath ;
+                }
+            }
+        }
 
         if(file_exists(__DIR__.'/../Routing.php')) {
             include __DIR__.'/../Routing.php' ;
@@ -81,8 +88,11 @@ class Kernel {
         $methodArgs = $method->getParameters() ;
         foreach ($methodArgs as $arg) {
             $pName = $arg->getName() ;
+
             if(isset($routeMap->getArguments()[$pName])) {
                 $invokeArgs[] = $routeMap->getArguments()[$pName] ;
+            } else {
+                $invokeArgs[] = null ;
             }
         }
 

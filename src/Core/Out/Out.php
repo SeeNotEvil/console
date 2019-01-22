@@ -20,9 +20,8 @@ class Out implements OutInterface
     const WARNING_PREFIX = "WARNING" ;
 
 
-    public function parseStr(string $str)
+    private function parseStr(string $str)
     {
-        preg_match("/<([a-zA-Z;:\s-]+)>(.*?)<\/([a-zA-Z;:\s-]+)>/ui", $str, $mathes) ;
         return preg_replace_callback("/<([a-zA-Z;:\s-]+)>(.*?)<\/([a-zA-Z;:\s-]+)>/ui", function($matches){
             return TagFactory::createOpenTag($matches[1]).$matches[2].TagFactory::createCloseTag() ;
         }, $str) ;
@@ -32,26 +31,18 @@ class Out implements OutInterface
 
     private function getMessage(string $message)
     {
-        return $message.PHP_EOL ;
+        return $this->parseStr($message).PHP_EOL ;
     }
 
-    /**
-     * Выводит строку с отступом
-     * @param string $message
-     * @param int $level
-     */
-    public function infoOffset(string $message, int $level = 0)
-    {
-        $this->info(str_repeat(" ", $level). $message) ;
-    }
 
     /**
      * Выводит строку
      * @param string $message
+     * @param int $level
      */
-    public function info(string $message)
+    public function info(string $message, int $level = 0)
     {
-        echo $this->getMessage($message) ;
+        echo str_repeat(" ", $level).$this->getMessage($message) ;
     }
 
     /**

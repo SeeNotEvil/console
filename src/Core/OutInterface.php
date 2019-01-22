@@ -11,7 +11,7 @@ interface OutInterface {
      * Выводит строку
      * @param string $message
      */
-    public function info(string $message) ;
+    public function info(string $message, int $level = 0) ;
 
     /**
      * Выводит уведомление
@@ -29,13 +29,6 @@ interface OutInterface {
      * @param string $message
      */
     public function error(string $message) ;
-
-    /**
-     * Выводит строку с отступом
-     * @param string $message
-     * @param int $level
-     */
-    public function infoOffset(string $message, int $level) ;
 
     /**
      * Выводим вопрос и принимаем ответ

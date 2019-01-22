@@ -2,7 +2,6 @@
 
 namespace SeeNotEvil\Console\Core ;
 
-use SeeNotEvil\Console\Core\Input\ArgumentParserInterface;
 
 /**
  * Class Route

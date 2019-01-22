@@ -11,6 +11,7 @@ namespace SeeNotEvil\Console\Core ;
 abstract class Command {
 
     private $kernel ;
+    protected static $description = "Description command";
 
     /**
      * Command constructor.
@@ -30,6 +31,12 @@ abstract class Command {
         return $this->kernel ;
     }
 
+
+    public function getArguments()
+    {
+        return $this->kernel->getArguments() ;
+    }
+
     /**
      * Получает интерфейс для работы с консолью
      * @return OutInterface
@@ -42,6 +49,10 @@ abstract class Command {
     /**
      * Метод вызваемый по умолчанию
      */
+    public static function description()  : string
+    {
+        return static::$description ;
+    }
 
 
 }

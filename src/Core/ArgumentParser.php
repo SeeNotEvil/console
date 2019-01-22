@@ -1,6 +1,6 @@
 <?php
 
-namespace SeeNotEvil\Console\Core\Input ;
+namespace SeeNotEvil\Console\Core ;
 
 /**
  * Класс преобразует параметры из строки в массив аргементов для передачи внутрь команды
@@ -33,6 +33,9 @@ class ArgumentParser implements ArgumentParserInterface {
             }
 
             $str = substr($array[$i], strlen(self::PARAM_PREFIX), strlen($array[$i])) ;
+            if(strpos('=', $str) === false) {
+                continue ;
+            }
             list($key, $value) = explode("=", $str) ;
 
             if(empty($key) || empty($value)) {

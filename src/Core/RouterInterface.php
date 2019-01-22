@@ -20,8 +20,18 @@ interface RouterInterface {
      */
     public function mapping(array $argv) : RouteMap ;
 
+    /**
+     * Добовляет маршрут
+     * @param $commandName
+     * @param $class
+     * @return mixed
+     */
     public function addRoute($commandName, $class) ;
 
-    public function getMaps() : array ;
+    /**
+     * Получить список всех маршрутов
+     * @return array
+     */
+    public function getRoutes() : array ;
 
 }

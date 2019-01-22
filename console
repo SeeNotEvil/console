@@ -6,6 +6,6 @@ require __DIR__.'/vendor/autoload.php' ;
 //echo "\e[0;31;41m fgsdg" ;
 //die() ;
 
-
-\SeeNotEvil\Console\Core\KernelFactory::factory()->execute() ;
+$config = include_once 'config.php' ;
+\SeeNotEvil\Console\Core\KernelFactory::factory($config)->execute() ;
 
