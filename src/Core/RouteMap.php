@@ -12,13 +12,12 @@ class RouteMap {
 
     private $className  ;
     private $methodName  ;
-    private $arguments ;
+    private $arguments = [];
 
-    public function __construct(string $className, string $methodName, array $arguments)
+    public function __construct(string $className, string $methodName)
     {
         $this->className = $className ;
         $this->methodName = $methodName ;
-        $this->arguments = [] ;
     }
 
     public function setClassName(string $className)

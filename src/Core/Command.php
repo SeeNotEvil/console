@@ -42,9 +42,6 @@ abstract class Command {
     /**
      * Метод вызваемый по умолчанию
      */
-    public function execute()
-    {
 
-    }
 
 }

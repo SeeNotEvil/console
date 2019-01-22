@@ -1,9 +1,4 @@
 <?php
-
 return [
-    'commands' => [
-        'test' => [
-            'description' => 'test command',
-        ]
-    ]
+   'routing_path' => __DIR__.'RoutingConsole.php'
 ] ;

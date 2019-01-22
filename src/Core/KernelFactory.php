@@ -3,6 +3,9 @@
 
 namespace SeeNotEvil\Console\Core ;
 
+use SeeNotEvil\Console\Core\Input\ArgumentParser;
+use SeeNotEvil\Console\Core\Out\Out;
+
 /**
  * Class KernelFactory
  * @package SeeNotEvil\Console\Core
@@ -10,12 +13,12 @@ namespace SeeNotEvil\Console\Core ;
 class KernelFactory {
 
 
-    public static function factory(array $config) : Kernel
+    public static function factory(array $config = []) : Kernel
     {
         $argumentParser = new ArgumentParser() ;
-        $router = new Route($config, $argumentParser) ;
+        $router = new Route($argumentParser) ;
         $out = new Out() ;
 
-        return new Kernel($router,$out, $config) ;
+        return new Kernel($router, $out, $config) ;
     }
 }

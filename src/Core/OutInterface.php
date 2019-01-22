@@ -7,7 +7,6 @@ namespace SeeNotEvil\Console\Core ;
  * @package SeeNotEvil\Console\Core
  */
 interface OutInterface {
-
     /**
      * Выводит строку
      * @param string $message
@@ -45,5 +44,6 @@ interface OutInterface {
      */
     public function question(string $message) : string ;
 
+    public function questionVariants(string $message, array $variants, $default = null) : string ;
 
 }

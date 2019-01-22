@@ -3,6 +3,9 @@
 
 require __DIR__.'/vendor/autoload.php' ;
 
-$config = include 'config.php';
-\SeeNotEvil\Console\Core\KernelFactory::factory($config)->execute($argv) ;
+//echo "\e[0;31;41m fgsdg" ;
+//die() ;
+
+
+\SeeNotEvil\Console\Core\KernelFactory::factory()->execute() ;
 

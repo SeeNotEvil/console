@@ -2,6 +2,8 @@
 
 namespace SeeNotEvil\Console\Core ;
 
+use SeeNotEvil\Console\Core\Input\ArgumentParserInterface;
+
 /**
  * Class Route
  * @package SeeNotEvil\Console\Core
@@ -9,7 +11,8 @@ namespace SeeNotEvil\Console\Core ;
 class Route implements RouterInterface
 {
 
-    private $config;
+    protected $maps = [] ;
+
     private $argumentParser;
 
     const PATTERN_VALID_COMMAND_NAME = "^[a-zA-Z0-9]+$" ;
@@ -18,10 +21,19 @@ class Route implements RouterInterface
 
     const MINIMUM_ARGUMENTS = 2 ;
 
-    public function __construct(array $config, ArgumentParserInterface $argumentParser)
+    public function __construct(ArgumentParserInterface $argumentParser)
     {
-        $this->config = $config;
         $this->argumentParser = $argumentParser;
+    }
+
+    public function addRoute($commandName, $class)
+    {
+        $this->maps[$commandName] = $class ;
+    }
+
+    public function getMaps() : array
+    {
+        return $this->maps ;
     }
 
     /**
@@ -36,12 +48,17 @@ class Route implements RouterInterface
             throw new \Exception("Many arguments for routing");
         }
 
-        $routerMap = new RouteMap("", self::DEFAULT_METHOD, []) ;
+        $routerMap = new RouteMap("", self::DEFAULT_METHOD) ;
 
         if (!preg_match("/".self::PATTERN_VALID_COMMAND_NAME."/ui", $argv[1])) {
             throw new \Exception("Command name must be only numbers and letters ");
         }
-        $routerMap->setClassName($this->getClassPath($argv[1])) ;
+
+        $className = $this->getClassPath($argv[1]) ;
+        if(empty($className)) {
+            throw new \Exception("Command class not exists");
+        }
+        $routerMap->setClassName($className) ;
 
         if(count($argv) == 2) {
             return $routerMap ;
@@ -63,7 +80,7 @@ class Route implements RouterInterface
 
     private function getClassPath(string $commandName)
     {
-        return $this->config[$commandName]['class'] ?? self::DEFAULT_PATH. "\\". $commandName;
+        return $this->maps[$commandName] ?? "";
     }
 
 

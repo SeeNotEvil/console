@@ -6,14 +6,18 @@ use SeeNotEvil\Console\Core\Command;
 
 class Test extends Command {
 
-    public function help($a = 3)
+    public function help()
     {
         $this->out()->info("This test help") ;
     }
 
     public function execute($a = 3)
     {
-        $this->out()->info("Execute test") ;
+        $i = 5;
+
+        echo --$i + $i++;
+
+        //$this->out()->info("Execute test") ;
     }
 
 }

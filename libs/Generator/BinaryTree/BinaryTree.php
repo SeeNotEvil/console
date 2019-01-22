@@ -29,16 +29,24 @@ class BinaryTree {
 
     protected function deleteNode($value)
     {
-        $node = $this->search($value) ;
-        if($node == null) {
-            return ;
-        }
+        $node = $this->root ;
+        $parent = null ;
 
         while ($node) {
+            if($node->value == $value) {
+                break ;
+            }
 
+            if($value > $node->value) {
+                $node = $node->rightChild ;
+            }
 
-
+            if($value > $node->value) {
+                $node = $node->leftChild ;
+            }
         }
+
+
     }
 
     public function search($value)

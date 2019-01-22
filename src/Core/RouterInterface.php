@@ -20,5 +20,8 @@ interface RouterInterface {
      */
     public function mapping(array $argv) : RouteMap ;
 
+    public function addRoute($commandName, $class) ;
+
+    public function getMaps() : array ;
 
 }

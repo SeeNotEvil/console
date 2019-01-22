@@ -19,31 +19,47 @@ class Kernel {
 
     /**
      * Kernel constructor.
-     * @param Route $route - роутинг который определяет какой класс и метод будут вызываться
-     * @param Out $out - интерфейс для общения с консолью
+     * @param RouterInterface $route - роутинг который определяет какой класс и метод будут вызываться
+     * @param OutInterface $out - интерфейс для общения с консолью
      * @param array $config
      */
-    public function __construct(RouterInterface $route, OutInterface $out, array $config)
+    public function __construct(RouterInterface $route, OutInterface $out, array $config = [])
     {
         $this->route = $route ;
         $this->out = $out ;
         $this->config = $config ;
+        $this->includeRouterFolder() ;
+    }
+
+
+    public function includeRouterFolder()
+    {
+
+        if(file_exists(__DIR__.'/../Routing.php')) {
+            include __DIR__.'/../Routing.php' ;
+        }
+
     }
 
     /**
      * Основной метод выполняет команду
-     * @param array $argv
+     * @param array $arguments
      * @return int
      */
-    public function execute(array $argv)
+    public function execute(array $arguments = [])
     {
+        global $argv ;
+
+        $arguments = !empty($arguments) ? $arguments : $argv ;
         try {
-            $this->runMethod($this->route->mapping($argv)) ;
+            $this->runMethod($this->route->mapping($arguments)) ;
             return self::STATUS_SUCCESS;
         } catch (\Exception $e) {
             $this->out->error($e->getMessage());
         } catch (\Throwable $e) {
-            $this->out->error("Throwable : " . $e->getMessage());
+            $this->out->error("Throwable : " . $e->getMessage(). PHP_EOL.
+                              "File : ". $e->getFile(). PHP_EOL
+                              );
         }
 
         return self::STATUS_ERROR;
@@ -76,14 +92,6 @@ class Kernel {
         $method->invokeArgs($command, $this->arguments) ;
     }
 
-    /**
-     * Получаем конфиг консоли со списком команд
-     * @return array
-     */
-    public function getConfig() : array
-    {
-        return $this->config ;
-    }
 
     /**
      * Получает масси распарщенных аргементов
@@ -97,6 +105,11 @@ class Kernel {
     public function out() : OutInterface
     {
         return $this->out ;
+    }
+
+    public function getCommands() : array
+    {
+        return $this->route->getMaps() ;
     }
 
 }
