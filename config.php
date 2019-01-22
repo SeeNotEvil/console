@@ -1,4 +1,4 @@
 <?php
 return [
-   'routing_path' => __DIR__.'RoutingConsole.php'
+   'routing_path' => __DIR__.'/routing.php'
 ] ;

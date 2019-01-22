@@ -41,11 +41,6 @@ class Kernel {
                 }
             }
         }
-
-        if(file_exists(__DIR__.'/../Routing.php')) {
-            include __DIR__.'/../Routing.php' ;
-        }
-
     }
 
     /**
@@ -110,6 +105,15 @@ class Kernel {
     public function getArguments() : array
     {
         return $this->arguments ;
+    }
+
+    /**
+     * Получает аргумент
+     * @return mixed
+     */
+    public function getArgument($name)
+    {
+        return $this->arguments[$name] ?? null ;
     }
 
     public function out() : OutInterface
