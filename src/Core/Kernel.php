@@ -76,6 +76,7 @@ class Kernel {
      */
     private function runMethod(RouteMap $routeMap)
     {
+        $this->arguments = $routeMap->getArguments() ;
         $reflection = new \ReflectionClass($routeMap->getClassName()) ;
         $method = $reflection->getMethod($routeMap->getMethodName()) ;
 
@@ -84,16 +85,16 @@ class Kernel {
         foreach ($methodArgs as $arg) {
             $pName = $arg->getName() ;
 
-            if(isset($routeMap->getArguments()[$pName])) {
+            if(isset($this->arguments[$pName])) {
                 $invokeArgs[] = $routeMap->getArguments()[$pName] ;
             } else {
                 $invokeArgs[] = null ;
             }
         }
 
-        $this->arguments = $invokeArgs ;
         $className = $routeMap->getClassName() ;
         $command = new $className($this) ;
+        //print_r($this->arguments) ;
         $method->invokeArgs($command, $this->arguments) ;
     }
 

@@ -11,7 +11,6 @@ class Test extends Command {
 
     public function execute($a = 3)
     {
-        print_r($this->kernel()->getArguments()) ;
         $this->out()->info("Execute test: <color:blue;background-color:white>" .$a."</color>") ;
     }
 

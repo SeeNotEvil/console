@@ -25,19 +25,20 @@ class ArgumentParser implements ArgumentParserInterface {
      */
     public function parse(array $array) : array
     {
+
         $params = [] ;
 
         for($i = 0; $i < count($array); $i++) {
-            if(!substr($array[$i], 0, strlen(self::PARAM_PREFIX)) == self::PARAM_PREFIX) {
+
+            if(substr($array[$i], 0, strlen(self::PARAM_PREFIX)) !== self::PARAM_PREFIX) {
                 throw new \Exception("Error param syntax". $array[$i]) ;
             }
 
             $str = substr($array[$i], strlen(self::PARAM_PREFIX), strlen($array[$i])) ;
-            if(strpos('=', $str) === false) {
+            if(strpos( $str, '=') === false) {
                 continue ;
             }
             list($key, $value) = explode("=", $str) ;
-
             if(empty($key) || empty($value)) {
                 throw new \Exception("Error param syntax ". $array[$i]) ;
             }
