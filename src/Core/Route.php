@@ -30,7 +30,7 @@ class Route implements RouterInterface
         $this->maps[$commandName] = $class ;
     }
 
-    public function getMaps() : array
+    public function getRoutes() : array
     {
         return $this->maps ;
     }
